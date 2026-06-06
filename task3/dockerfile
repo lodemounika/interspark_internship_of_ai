@@ -1,0 +1,17 @@
+# Use Python 3.10 base image
+FROM python:3.10
+
+# Create working directory
+WORKDIR /app
+
+# Copy all project files
+COPY . /app
+
+# Install required packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Open port 5000
+EXPOSE 5000
+
+# Run Flask application
+CMD ["python", "app.py"]
