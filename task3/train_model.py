@@ -1,17 +1,9 @@
-# ============================================================
-# TRAIN SPAM DETECTION MODEL
-# ============================================================
-
 import pandas as pd
 import string
 import pickle
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-
-# ============================================================
-# LOAD DATASET
-# ============================================================
 
 df = pd.read_csv(r"C:\Users\DELL\Downloads\archive\spam.csv", encoding='latin-1')
 
@@ -22,10 +14,6 @@ df = df.iloc[:, :2]
 df.columns = ['label', 'message']
 
 print(df.head())
-
-# ============================================================
-# PREPROCESS FUNCTION
-# ============================================================
 
 def preprocess(text):
 
@@ -48,29 +36,17 @@ df['label'] = df['label'].map({
     'spam': 1
 })
 
-# ============================================================
-# TF-IDF FEATURE EXTRACTION
-# ============================================================
-
 vectorizer = TfidfVectorizer()
 
 X = vectorizer.fit_transform(df['message'])
 
 y = df['label']
 
-# ============================================================
-# TRAIN MODEL
-# ============================================================
-
 model = LogisticRegression()
 
 model.fit(X, y)
 
 print("\nModel Training Completed!")
-
-# ============================================================
-# SAVE MODEL
-# ============================================================
 
 pickle.dump(
     model,
