@@ -1,13 +1,3 @@
-# ============================================================
-# DEEP LEARNING PROJECT
-# CIFAR-10 IMAGE CLASSIFICATION USING TENSORFLOW
-# FINAL MEMORY-EFFICIENT VERSION
-# ============================================================
-
-# ============================================================
-# 1. IMPORT LIBRARIES
-# ============================================================
-
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 from tensorflow.keras.applications import MobileNetV2
@@ -19,10 +9,6 @@ import numpy as np
 from sklearn.metrics import classification_report
 from sklearn.metrics import confusion_matrix
 import seaborn as sns
-
-# ============================================================
-# 2. LOAD CIFAR-10 DATASET
-# ============================================================
 
 (X_train, y_train), (X_test, y_test) = datasets.cifar10.load_data()
 
@@ -43,16 +29,8 @@ class_names = [
 print("Training Images Shape:", X_train.shape)
 print("Testing Images Shape :", X_test.shape)
 
-# ============================================================
-# 3. NORMALIZATION
-# ============================================================
-
 X_train = X_train.astype('float32') / 255.0
 X_test = X_test.astype('float32') / 255.0
-
-# ============================================================
-# 4. DATA AUGMENTATION
-# ============================================================
 
 datagen = ImageDataGenerator(
 
@@ -66,10 +44,6 @@ datagen = ImageDataGenerator(
 
     zoom_range=0.1
 )
-
-# ============================================================
-# 5. DISPLAY SAMPLE IMAGES
-# ============================================================
 
 plt.figure(figsize=(10,10))
 
@@ -87,10 +61,6 @@ plt.tight_layout()
 
 plt.show()
 
-# ============================================================
-# 6. LOAD PRETRAINED MODEL
-# ============================================================
-
 base_model = MobileNetV2(
 
     input_shape=(96, 96, 3),
@@ -102,10 +72,6 @@ base_model = MobileNetV2(
 
 # Freeze pretrained layers
 base_model.trainable = False
-
-# ============================================================
-# 7. BUILD MODEL
-# ============================================================
 
 model = models.Sequential([
 
@@ -127,10 +93,6 @@ model = models.Sequential([
     layers.Dense(10, activation='softmax')
 ])
 
-# ============================================================
-# 8. COMPILE MODEL
-# ============================================================
-
 model.compile(
 
     optimizer='adam',
@@ -142,10 +104,6 @@ model.compile(
 
 # Display model summary
 model.summary()
-
-# ============================================================
-# 9. TRAIN MODEL
-# ============================================================
 
 history = model.fit(
 
@@ -160,10 +118,6 @@ history = model.fit(
     validation_data=(X_test, y_test)
 )
 
-# ============================================================
-# 10. EVALUATE MODEL
-# ============================================================
-
 test_loss, test_accuracy = model.evaluate(
     X_test,
     y_test
@@ -174,17 +128,9 @@ print("TEST ACCURACY :", round(test_accuracy, 4))
 print("TEST LOSS     :", round(test_loss, 4))
 print("===================================")
 
-# ============================================================
-# 11. PREDICTIONS
-# ============================================================
-
 y_pred_probs = model.predict(X_test)
 
 y_pred = np.argmax(y_pred_probs, axis=1)
-
-# ============================================================
-# 12. CLASSIFICATION REPORT
-# ============================================================
 
 print("\n===================================")
 print("CLASSIFICATION REPORT")
@@ -198,10 +144,6 @@ print(classification_report(
 
     target_names=class_names
 ))
-
-# ============================================================
-# 13. CONFUSION MATRIX
-# ============================================================
 
 cm = confusion_matrix(y_test, y_pred)
 
@@ -232,10 +174,6 @@ plt.tight_layout()
 
 plt.show()
 
-# ============================================================
-# 14. ACCURACY CURVE
-# ============================================================
-
 plt.figure(figsize=(8,6))
 
 plt.plot(
@@ -259,10 +197,6 @@ plt.legend()
 plt.grid(True)
 
 plt.show()
-
-# ============================================================
-# 15. LOSS CURVE
-# ============================================================
 
 plt.figure(figsize=(8,6))
 
@@ -288,17 +222,9 @@ plt.grid(True)
 
 plt.show()
 
-# ============================================================
-# 16. SAVE MODEL
-# ============================================================
-
 model.save("cifar10_model.keras")
 
 print("\nModel Saved Successfully!")
-
-# ============================================================
-# 17. SINGLE IMAGE INFERENCE
-# ============================================================
 
 sample_image = X_test[0]
 
@@ -327,19 +253,11 @@ print("\nPredicted Class:",
 print("Actual Class   :",
       class_names[y_test[0][0]])
 
-# ============================================================
-# 18. LOAD SAVED MODEL
-# ============================================================
-
 loaded_model = tf.keras.models.load_model(
     "cifar10_model.keras"
 )
 
 print("\nSaved Model Loaded Successfully!")
-
-# ============================================================
-# 18. USER IMAGE TESTING
-# ============================================================
 
 print("\n===================================")
 print("USER IMAGE TESTING")
@@ -386,5 +304,5 @@ while True:
     print("Actual Class    :",
           class_names[actual_class])
 
-    print("-----------------------------------")
+
 
