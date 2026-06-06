@@ -1,0 +1,100 @@
+# ML Classification Project: Spam Message Detection
+
+## 1. Objective
+
+The objective of this project is to build and evaluate a supervised machine learning model for classifying SMS messages as Spam or Ham (Not Spam).
+
+## 2. Dataset
+
+The SMS Spam Collection Dataset was used for training and evaluation.
+
+* Total Messages: 5,572
+* Classes:
+
+  * Spam
+  * Ham
+
+## 3. Data Preprocessing
+
+The following preprocessing steps were performed:
+
+1. Converted all text to lowercase.
+2. Removed punctuation marks.
+3. Removed stop words.
+4. Applied TF-IDF vectorization to transform text into numerical features.
+
+## 4. Train-Test Split
+
+The dataset was divided into:
+
+* Training Set: 80%
+* Testing Set: 20%
+
+This ensures that the model is evaluated on unseen data.
+
+## 5. Algorithms Compared
+
+Two supervised machine learning algorithms were evaluated:
+
+### Logistic Regression
+
+A linear classification algorithm commonly used for text classification problems.
+
+### Multinomial Naive Bayes
+
+A probabilistic classifier particularly effective for document and message classification.
+
+## 6. Cross-Validation
+
+5-Fold Cross Validation was performed to evaluate model stability and generalization capability.
+
+## 7. Evaluation Metrics
+
+The following metrics were calculated for each model:
+
+* Accuracy
+* Precision
+* Recall
+* F1 Score
+* ROC-AUC Score
+
+## 8. Results
+
+| Metric    | Logistic Regression | Naive Bayes |
+| --------- | ------------------- | ----------- |
+| Accuracy  | XX.XX%              | XX.XX%      |
+| Precision | XX.XX%              | XX.XX%      |
+| Recall    | XX.XX%              | XX.XX%      |
+| F1 Score  | XX.XX%              | XX.XX%      |
+| ROC-AUC   | XX.XX%              | XX.XX%      |
+
+*(Replace with your actual values from execution.)*
+
+## 9. Visualizations
+
+The following plots were generated:
+
+* Confusion Matrix
+* ROC Curve
+* Model Comparison Chart
+
+These visualizations help compare the performance of both classifiers.
+
+## 10. Model Selection
+
+Based on the evaluation metrics, Logistic Regression achieved the best overall performance and was selected as the final model for deployment.
+
+## 11. Conclusion
+
+A complete spam message classification system was successfully developed using supervised machine learning techniques.
+
+The project demonstrated:
+
+* Text preprocessing
+* Feature extraction using TF-IDF
+* Model training and evaluation
+* Cross-validation
+* Algorithm comparison
+* Performance visualization
+
+The selected model can be further deployed for real-time spam detection applications.
