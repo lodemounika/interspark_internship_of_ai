@@ -1,56 +1,76 @@
 # ML Classification Project: Spam Message Detection
 
-## 1. Objective
+## 1. Introduction
 
-The objective of this project is to build and evaluate a supervised machine learning model for classifying SMS messages as Spam or Ham (Not Spam).
+In today's digital world, spam messages are very common and can be annoying or even dangerous. The aim of this project is to build a machine learning model that can automatically classify SMS messages as either Spam or Ham (normal message).
 
-## 2. Dataset
+This project demonstrates the complete machine learning workflow, including data preprocessing, feature extraction, model training, evaluation, and model comparison.
 
-The SMS Spam Collection Dataset was used for training and evaluation.
+---
+
+## 2. Dataset Description
+
+For this project, I used the SMS Spam Collection Dataset.
+
+Dataset Details:
 
 * Total Messages: 5,572
 * Classes:
 
-  * Spam
-  * Ham
+  * Ham (Normal Messages)
+  * Spam (Unwanted Messages)
+
+The dataset contains real SMS messages collected for spam classification research.
+
+---
 
 ## 3. Data Preprocessing
 
+Before training the model, the text data was cleaned and prepared.
+
 The following preprocessing steps were performed:
 
-1. Converted all text to lowercase.
-2. Removed punctuation marks.
-3. Removed stop words.
-4. Applied TF-IDF vectorization to transform text into numerical features.
+* Converted all text into lowercase.
+* Removed punctuation marks.
+* Removed English stopwords using NLTK.
+* Converted text into numerical features using TF-IDF Vectorization.
+
+After preprocessing, the TF-IDF feature matrix size became:
+
+TF-IDF Shape: (5572, 9376)
+
+This means 5,572 messages were converted into 9,376 numerical features.
+
+---
 
 ## 4. Train-Test Split
 
-The dataset was divided into:
+The dataset was divided into training and testing sets.
 
-* Training Set: 80%
-* Testing Set: 20%
+* Training Data: 4,457 messages
+* Testing Data: 1,115 messages
 
-This ensures that the model is evaluated on unseen data.
+The training data was used to train the models, while the testing data was used to evaluate their performance.
 
-## 5. Algorithms Compared
+---
 
-Two supervised machine learning algorithms were evaluated:
+## 5. Machine Learning Algorithms Used
 
-### Logistic Regression
+To compare performance, two different classification algorithms were used:
 
-A linear classification algorithm commonly used for text classification problems.
+### 5.1 Multinomial Naive Bayes
 
-### Multinomial Naive Bayes
+Multinomial Naive Bayes is a probabilistic machine learning algorithm that is widely used for text classification tasks such as spam filtering.
 
-A probabilistic classifier particularly effective for document and message classification.
+### 5.2 Logistic Regression
 
-## 6. Cross-Validation
+Logistic Regression is a supervised learning algorithm that predicts the probability of a message belonging to a particular class.
 
-5-Fold Cross Validation was performed to evaluate model stability and generalization capability.
+---
 
-## 7. Evaluation Metrics
+## 6. Model Evaluation Metrics
 
-The following metrics were calculated for each model:
+The following metrics were used to evaluate both models:
 
 * Accuracy
 * Precision
@@ -58,43 +78,129 @@ The following metrics were calculated for each model:
 * F1 Score
 * ROC-AUC Score
 
-## 8. Results
+These metrics provide a better understanding of model performance beyond accuracy alone.
 
-| Metric    | Logistic Regression | Naive Bayes |
-| --------- | ------------------- | ----------- |
-| Accuracy  | XX.XX%              | XX.XX%      |
-| Precision | XX.XX%              | XX.XX%      |
-| Recall    | XX.XX%              | XX.XX%      |
-| F1 Score  | XX.XX%              | XX.XX%      |
-| ROC-AUC   | XX.XX%              | XX.XX%      |
+---
 
-*(Replace with your actual values from execution.)*
+## 7. Results
+
+### Naive Bayes Results
+
+* Accuracy: 96.59%
+* Precision: 100.00%
+* Recall: 74.67%
+* F1 Score: 85.50%
+* ROC-AUC Score: 98.16%
+
+### Logistic Regression Results
+
+* Accuracy: 94.26%
+* Precision: 95.74%
+* Recall: 60.00%
+* F1 Score: 73.77%
+* ROC-AUC Score: 98.70%
+
+---
+
+## 8. Cross Validation
+
+To ensure the models generalize well, 5-Fold Cross Validation was performed.
+
+### Naive Bayes
+
+Cross Validation Scores:
+
+* 0.9677
+* 0.9587
+* 0.9587
+* 0.9614
+* 0.9614
+
+Average Accuracy:
+
+96.16%
+
+### Logistic Regression
+
+Cross Validation Scores:
+
+* 0.9552
+* 0.9453
+* 0.9506
+* 0.9452
+* 0.9479
+
+Average Accuracy:
+
+94.89%
+
+The cross-validation results show that both models are stable, with Naive Bayes achieving slightly better performance.
+
+---
 
 ## 9. Visualizations
 
-The following plots were generated:
+The following visualizations were generated during the project:
 
 * Confusion Matrix
 * ROC Curve
-* Model Comparison Chart
+* Model Comparison Graph
 
-These visualizations help compare the performance of both classifiers.
+These plots helped in understanding and comparing the performance of both algorithms.
+
+---
 
 ## 10. Model Selection
 
-Based on the evaluation metrics, Logistic Regression achieved the best overall performance and was selected as the final model for deployment.
+After comparing both models, Naive Bayes was selected as the better model for this project.
 
-## 11. Conclusion
+Reasons:
 
-A complete spam message classification system was successfully developed using supervised machine learning techniques.
+* Higher Accuracy
+* Higher Recall
+* Better F1 Score
+* Better Cross Validation Accuracy
 
-The project demonstrated:
+Although Logistic Regression achieved a slightly higher ROC-AUC score, Naive Bayes performed better overall for spam message classification.
 
-* Text preprocessing
-* Feature extraction using TF-IDF
-* Model training and evaluation
+---
+
+## 11. Testing the Model
+
+The trained model was tested using custom messages entered by the user.
+
+Example:
+
+Message:
+
+"Congratulations! Claim your prize now!"
+
+Prediction:
+
+Spam
+
+Spam Probability:
+
+81.34%
+
+The model was also tested on multiple sample messages and successfully classified most messages correctly.
+
+---
+
+## 12. Conclusion
+
+In this project, I successfully developed a spam message classification system using machine learning techniques.
+
+The project included:
+
+* Data preprocessing
+* TF-IDF feature extraction
+* Train-test split
 * Cross-validation
-* Algorithm comparison
-* Performance visualization
+* Comparison of two machine learning algorithms
+* Model evaluation using multiple metrics
+* Custom message testing
 
-The selected model can be further deployed for real-time spam detection applications.
+Based on the experimental results, Naive Bayes performed better than Logistic Regression and was selected as the final model.
+
+This project helped me understand how machine learning can be applied to real-world text classification problems such as spam detection.
