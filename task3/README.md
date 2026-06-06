@@ -1,23 +1,22 @@
 # Spam Detection API using Flask and Docker
 
-## Project Description
+## Project Overview
 
-This project was developed as part of an AI Internship assignment. The objective was to deploy a Machine Learning model using Flask and create an API that can predict whether a given message is Spam or Ham (Not Spam).
+This project was developed as part of an AI Internship assignment. The objective of this project is to deploy a Machine Learning Spam Detection model using Flask and provide real-time predictions through a REST API.
 
-The model is trained on an SMS Spam Collection dataset using TF-IDF Vectorization and Logistic Regression. After training, the model is integrated with a Flask application to provide real-time predictions through API endpoints.
+The model is trained using SMS spam messages and can classify a given message as either Spam or Ham (Not Spam). The API accepts user input in JSON format and returns the prediction along with the spam probability score.
 
-In addition, Docker support has been included to make the application easy to deploy across different environments.
+Docker support is also included to make the application portable and easy to deploy.
 
 ---
 
-## Features
+## Objectives
 
-* Spam Message Classification
-* REST API using Flask
-* Real-Time Prediction
-* JSON Request and Response Handling
-* Docker Containerization
-* Easy Local Deployment
+* Build a Spam Detection model using Machine Learning.
+* Deploy the trained model using Flask.
+* Create API endpoints for prediction.
+* Return results in JSON format.
+* Containerize the application using Docker.
 
 ---
 
@@ -29,54 +28,52 @@ In addition, Docker support has been included to make the application easy to de
 * Pandas
 * NumPy
 * NLTK
+* TF-IDF Vectorization
+* Logistic Regression
 * Docker
 
 ---
 
 ## Project Structure
 
+```text
 task3_api_deployment/
 
 ├── app.py
-
 ├── train_model.py
-
 ├── spam_model.pkl
-
 ├── vectorizer.pkl
-
 ├── requirements.txt
-
 ├── Dockerfile
-
 ├── report.pdf
-
-├── demo_video.mp4
-
+├── screenshots/
+│   ├── flask_server.png
+│   └── api_testing.png
 └── README.md
+```
 
 ---
 
 ## Model Information
 
-### Machine Learning Algorithm
+### Algorithm Used
 
 * Logistic Regression
 
-### Feature Extraction Technique
+### Feature Extraction
 
 * TF-IDF Vectorization
 
-### Prediction Classes
+### Output Classes
 
 * Spam
 * Ham (Not Spam)
 
 ---
 
-## How to Run the Project
+## Installation
 
-### Step 1: Install Dependencies
+### Step 1: Install Required Packages
 
 ```bash
 pip install -r requirements.txt
@@ -88,10 +85,10 @@ pip install -r requirements.txt
 python app.py
 ```
 
-After execution, the application will start on:
+Expected Output:
 
 ```text
-http://127.0.0.1:5000
+* Running on http://127.0.0.1:5000
 ```
 
 ---
@@ -107,6 +104,8 @@ Response:
 ```text
 Spam Detection API Running Successfully!
 ```
+
+---
 
 ### Prediction Endpoint
 
@@ -132,25 +131,84 @@ Sample Response:
 
 ---
 
-## Testing Using cURL
+## Testing the API
+
+### Test Case 1 - Normal Message
+
+Request:
 
 ```bash
-curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d "{\"message\":\"Congratulations! You won a free iPhone\"}"
+curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d "{\"message\":\"Hi, how are you today?\"}"
 ```
 
-Example Output:
+Response:
 
 ```json
 {
-  "message": "Congratulations! You won a free iPhone",
+  "message": "Hi, how are you today?",
   "prediction": "Ham",
-  "spam_probability": 0.4431
+  "spam_probability": 0.024
 }
 ```
 
+Result:
+
+The model correctly identified the message as a normal (Ham) message.
+
 ---
 
-## Docker Commands
+### Test Case 2 - Spam Message
+
+Request:
+
+```bash
+curl -X POST http://127.0.0.1:5000/predict -H "Content-Type: application/json" -d "{\"message\":\"Claim your free prize now! Limited offer!\"}"
+```
+
+Response:
+
+```json
+{
+  "message": "Claim your free prize now! Limited offer!",
+  "prediction": "Spam",
+  "spam_probability": 0.8756
+}
+```
+
+Result:
+
+The model successfully identified the message as Spam with a high probability score.
+
+---
+
+## Flask Server Output
+
+The Flask application was executed successfully.
+
+```text
+python intern_app1.py
+
+* Serving Flask app 'intern_app1'
+* Debug mode: on
+* Running on all addresses (0.0.0.0)
+* Running on http://127.0.0.1:5000
+* Running on http://192.168.43.238:5000
+Press CTRL+C to quit
+```
+
+Successful API Requests:
+
+```text
+127.0.0.1 - - [06/Jun/2026 15:18:14] "POST /predict HTTP/1.1" 200 -
+127.0.0.1 - - [06/Jun/2026 15:18:19] "POST /predict HTTP/1.1" 200 -
+127.0.0.1 - - [06/Jun/2026 15:18:39] "POST /predict HTTP/1.1" 200 -
+```
+
+HTTP Status Code 200 confirms that the API processed the requests successfully.
+
+---
+
+## Docker Setup
 
 ### Build Docker Image
 
@@ -164,7 +222,7 @@ docker build -t spam-api .
 docker run -p 5000:5000 spam-api
 ```
 
-After running the container, open:
+Access the application at:
 
 ```text
 http://localhost:5000
@@ -172,32 +230,55 @@ http://localhost:5000
 
 ---
 
-## Demo Video
+## Screenshots
 
-A complete demonstration of the project execution is included in this repository.
+The repository contains screenshots demonstrating:
 
-File:
+* Flask server execution
+* Home endpoint response
+* API testing using cURL
+* Prediction results
+
+Example:
 
 ```text
-demo_video.mp4
+screenshots/
+├── flask_server.png
+└── api_testing.png
 ```
 
-The video demonstrates:
+---
 
-* Running the Flask Application
-* Testing the Home Endpoint
-* Sending Prediction Requests
-* Viewing JSON Responses
-* Spam Detection Results
+## Features
+
+* Spam Detection
+* REST API Deployment
+* JSON Request and Response
+* Real-Time Prediction
+* Docker Containerization
+* Machine Learning Model Integration
+
+---
+
+## Learning Outcomes
+
+Through this project, I learned:
+
+* How to train and save a Machine Learning model.
+* How to create REST APIs using Flask.
+* How to load and use trained models for inference.
+* How to process JSON requests and responses.
+* How Docker can be used for application deployment.
 
 ---
 
 ## Conclusion
 
-This project helped me understand the complete deployment workflow of a Machine Learning model. I learned how to train a model, save it, integrate it with Flask APIs, and prepare it for deployment using Docker. The project also provided practical experience in handling API requests and returning predictions in JSON format.
+This project successfully demonstrates the deployment of a Machine Learning Spam Detection model using Flask. The API can classify incoming messages as Spam or Ham and return the results in JSON format. The project provides a complete workflow from model training to deployment and testing.
 
 ---
 
 ## Author
 
-L Mounika 
+L Mounika
+
