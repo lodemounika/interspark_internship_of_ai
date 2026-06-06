@@ -214,25 +214,14 @@ docker run -p 5000:5000 spam-api
 
 ---
 
-## Screenshots
-
 ### Flask Server Running
 
-Add your screenshot here:
-
-```md
 ![Flask Server](task3/screenshots/flask_server.png)
-```
 
 ### API Testing
 
-Add your screenshot here:
-
-```md
 ![API Testing](task3/screenshots/api_testing.png)
-```
 
----
 
 ## Skills Demonstrated
 
